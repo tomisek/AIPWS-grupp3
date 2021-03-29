@@ -1,0 +1,6 @@
+POST http://127.0.0.1:6000/api/predict
+
+{
+   "artists" : 10573.0,
+   "acousticness": 0.567
+}
