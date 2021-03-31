@@ -3,6 +3,8 @@ import App from './App.vue'
 import './index.css'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import store from './store.js'
 
-
-createApp(App).mount('#app')
+const app = createApp(App)
+app.use(store)
+app.mount('#app')
