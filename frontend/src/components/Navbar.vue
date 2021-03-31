@@ -1,31 +1,29 @@
 <template>
-  <div class="container">
-    <div class="page-header">
-      <h1>My First Bootstrap Page</h1>
-      <p>Resize this responsive page to see the effect!</p>
-      <!-- <nav>
-          <router-link to='/'>Home</router-link>
-          <router-link to="/predict">Predict</router-link>
-          <router-link to='/statistics'>Statistics</router-link>
-      </nav> -->
-    </div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<main>
+  <div class="jumbotron" style="background-color: #20c997;">
+    <!-- <div class="page-header" > -->
+      <router-link class="text-dark" to="/"><h1>Predict Song popularity</h1></router-link>
+      
+    <!-- </div> -->
+    <nav class="navbar navbar-expand-sm navbar-light bg-lightm " style="background-color: #20c997;">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <!-- <a class="navbar-brand" href="#">Navbar</a> -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-            <a class="nav-link" href="#">Features</a>
-            <a class="nav-link" href="#">Pricing</a>
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          <div class="navbar-nav mx-auto">
+            <!-- <router-link class="nav-link " aria-current="page" to="/">Home</router-link> -->
+            <router-link class="nav-link" to="/predict">Predict</router-link>
+            <router-link class="nav-link" to="/statistics">Statistics</router-link>
+            
           </div>
         </div>
       </div>
     </nav>
   </div>
+</main>
+  
 </template>
 
 <script>
@@ -34,6 +32,12 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.router-link-active{
+  background:rgba(43, 49, 30, 0.11);
+}
+h1 {
+  font-family: 'Julius Sans One', sans-serif;
+}
 
 </style>
