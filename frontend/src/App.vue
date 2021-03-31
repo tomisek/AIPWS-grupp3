@@ -1,18 +1,24 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3.0 + Vite" />
-  <Prediction />
+  <div>
+    <Prediction />
+
+    <p>Popularity: {{ prediction }} </p>
+  </div>
+  
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 import Prediction from './components/Prediction.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
     Prediction
+  },
+  computed: {
+    prediction(){
+      return this.$store.state.prediction
+    }
   }
 }
 </script>
