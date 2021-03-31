@@ -1,19 +1,23 @@
 <template>
-  <div>
+  <main>
+    <Navbar />
+    <router-view />
     <Prediction />
-
     <p>Popularity: {{ prediction }} </p>
-  </div>
-  
+
+  </main>
+    
 </template>
 
 <script>
 import Prediction from './components/Prediction.vue'
+import Navbar from './components/Navbar.vue'
 
 export default {
   name: 'App',
   components: {
-    Prediction
+    Prediction,
+    Navbar
   },
   computed: {
     prediction(){
