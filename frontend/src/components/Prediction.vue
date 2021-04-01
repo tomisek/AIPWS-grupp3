@@ -11,11 +11,11 @@
             <label for="year">Year</label><br>
             <button>test</button>
         </form> -->
-        <div class="container-md  ">
+        <div class="container-md ">
             <form @submit.prevent ="predict">
                 <div class ="form-group row">
                     <label for="artist" class="col-sm-2 col-form-label text-left">Artist </label>
-                    <input type="range" v-model="artists" placeholder="Enter artist name..." min="1" max="30000">
+                    <input type="range" v-model="artists" placeholder="Enter artist name...">
                 </div>
                 <div class="form-group row">
                     <label for="acousticness" class="col-sm-2 col-form-label text-left">Acousticness</label>
@@ -27,8 +27,9 @@
                     <div class="form-group row col-sm-2 col-form-label"> {{ year }}</div>
                     <input v-model="year"  type="range" class="form-control-range" id="year" min="1920" max="2021" >
                 </div>
-                <fieldset class="form-group row float-left">
-                    <legend class="col-form-label col-sm-2 pt-0">Explicit</legend>
+
+                <fieldset class="form-group row">
+                    <legend class="col-form-label col-sm-2 text-left">Explicit</legend>
                     <div class="col-sm-10">
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
@@ -44,6 +45,11 @@
                     </div>
                     </div>
                 </fieldset>
+                <div class="form-group row">
+                    <label for="year" class="col-sm-2 col-form-label text-left">Year </label>
+                    <div class="form-group row col-sm-2 col-form-label"> {{ year }}</div>
+                    <input v-model="year"  type="range" class="form-control-range" id="year" min="1920" max="2021" >
+                </div>
 
                 <div class="form-group row">
                     <div class="col-sm-10">
@@ -52,6 +58,7 @@
                 </div>
 
             </form>
+            <p>Popularity: {{ prediction }} </p>
         </div>
     </main>
 </template>
