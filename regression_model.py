@@ -9,8 +9,8 @@ from sklearn.preprocessing import OrdinalEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score, mean_squared_error
 
-predict_values = []
-enc = OrdinalEncoder() 
+
+enc = OrdinalEncoder(handle_unknown = 'use_encoded_value', unknown_value = np.nan) 
 
 xgb_r = xgb.XGBRegressor(
     max_depth=13,
@@ -70,7 +70,7 @@ def train_model():
     print("mse:", mean_squared_error(y_test, y_pred))
     print("rmse:", mean_squared_error(y_test, y_pred, squared=False))
 
-    df['artists'] = X[:,0]
+    #df['artists'] = X[:,0]
 
     con.close()
 

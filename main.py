@@ -4,7 +4,6 @@ from sanic import Sanic, response as res
 from regression_model import OrdinalEncoder
 from regression_model import enc
 
-enc = OrdinalEncoder() 
 
 app = Sanic(__name__)
 
