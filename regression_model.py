@@ -35,7 +35,7 @@ def train_model():
     df.drop(df[df['year'] <=1921].index, inplace=True)
     df = df[['artists',
          'acousticness',
-         #'danceability',
+         'danceability',
          #'energy',
          #'explicit',
          #'instrumentalness',

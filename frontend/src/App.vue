@@ -3,7 +3,7 @@
     <Navbar />
     <router-view />
     <Prediction />
-    <!-- <p>Popularity: {{ prediction }} </p> -->
+    <p>Popularity: {{ prediction }} </p>
 
   </main>
     

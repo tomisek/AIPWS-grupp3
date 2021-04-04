@@ -46,9 +46,9 @@
                     </div>
                 </fieldset>
                 <div class="form-group row">
-                    <label for="year" class="col-sm-2 col-form-label text-left">Year </label>
-                    <div class="form-group row col-sm-2 col-form-label"> {{ year }}</div>
-                    <input v-model="year"  type="range" class="form-control-range" id="year" min="1920" max="2021" >
+                    <label for="danceability" class="col-sm-2 col-form-label text-left">danceability </label>
+                    <div class="form-group row col-sm-2 col-form-label"> {{ danceability }}</div>
+                    <input v-model="danceability"  type="range" class="form-control-range" id="danceability" min="0" max="1" step="0.001">
                 </div>
 
                 <div class="form-group row">
@@ -69,7 +69,9 @@ export default {
         return{
             artists: '',
             acousticness: 0.5,
-            year: 1970
+            year: 1970,
+            danceability: 0.5
+
         }
     },
     methods:{
@@ -79,7 +81,8 @@ export default {
             let values = {
                 artists: this.artists,
                 acousticness : this.acousticness,
-                year: this.year
+                year: this.year,
+                danceability: this.danceability
             }
 
             let res = await fetch('api/predict', {
