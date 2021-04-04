@@ -60,7 +60,7 @@
 export default {
     data(){
         return{
-            artists: "",
+            artists: '',
             acousticness: 0.5,
             year: 1970
         }
