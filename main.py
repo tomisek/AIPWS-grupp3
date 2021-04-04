@@ -18,14 +18,15 @@ train_model()
 async def predict_click(req):
   values = req.json
 
-  # get prediction with provided values
-  # if values['artists'] == df['artists']:
-  #   print("Yes, 'apple' is in the fruits list")
-
   artistic = "[" + "'" + values['artists'] + "'" + "]"
-  print(values['artists'])
 
-  prediction = predict([enc.transform([[artistic]]).ravel()[0], values['acousticness'],values['year']])
+  artistical = enc.transform([[artistic]]).ravel()[0]
+
+  print(values['artists'])
+  print(artistical)
+  print(artistic)
+
+  prediction = predict([artistical, values['acousticness'],values['year']])
 
   return res.json(prediction.tolist())
 
