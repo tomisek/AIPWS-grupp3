@@ -58,7 +58,7 @@
                 </div>
 
             </form>
-            <p>Popularity: {{ prediction }} </p>
+
         </div>
     </main>
 </template>
