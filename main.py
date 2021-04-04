@@ -1,11 +1,13 @@
 from regression_model import train_model, predict
 from sanic import Sanic, response as res
+#from sklearn.preprocessing import OrdinalEncoder
+from regression_model import OrdinalEncoder
+from regression_model import enc
+
 
 app = Sanic(__name__)
 
 train_model()
-
-print(predict([6316.0, 0.678, 2020]))
 
 # possible ways to call the endpoint
 # GET /api/predict/:age/:income
@@ -16,10 +18,16 @@ print(predict([6316.0, 0.678, 2020]))
 async def predict_click(req):
   values = req.json
 
-  # get prediction with provided values
-  prediction = predict([values['artists'],values['acousticness'],values['year']])  
+  artistic = "[" + "'" + values['artists'] + "'" + "]"
 
-  # send prediction as json
+  artistical = enc.transform([[artistic]]).ravel()[0]
+
+  print(values['artists'])
+  print(artistical)
+  print(artistic)
+
+  prediction = predict([artistical, values['acousticness'],values['year']])
+
   return res.json(prediction.tolist())
 
 # start webserver

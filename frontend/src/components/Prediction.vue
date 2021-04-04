@@ -15,7 +15,7 @@
             <form @submit.prevent ="predict">
                 <div class ="form-group row">
                     <label for="artist" class="col-sm-2 col-form-label text-left">Artist </label>
-                    <input type="range" v-model="artists" placeholder="Enter artist name...">
+                    <input type="text" v-model="artists" placeholder="Enter artist name...">
                 </div>
                 <div class="form-group row">
                     <label for="acousticness" class="col-sm-2 col-form-label text-left">Acousticness</label>
@@ -67,7 +67,7 @@
 export default {
     data(){
         return{
-            artists: "",
+            artists: '',
             acousticness: 0.5,
             year: 1970
         }

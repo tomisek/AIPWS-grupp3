@@ -4,12 +4,13 @@ import pandas as pd
 import sqlite3
 import xgboost as xgb
 
-from sklearn.compose import ColumnTransformer
+
 from sklearn.preprocessing import OrdinalEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score, mean_squared_error
 
-predict_values = []
+
+enc = OrdinalEncoder(dtype = 'int64', handle_unknown = 'use_encoded_value', unknown_value = 100000)
 
 xgb_r = xgb.XGBRegressor(
     max_depth=13,
@@ -56,8 +57,7 @@ def train_model():
     X= df.iloc[:, :-1].values
     y= df.iloc[:, -1].values
 
-    ct = ColumnTransformer(transformers=[('encoder', OrdinalEncoder(),[0])], remainder='passthrough')
-    X = np.array(ct.fit_transform(X))
+    X[:,0] = enc.fit_transform(X[:,0].reshape(-1,1)).ravel()
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 1)
 
@@ -70,11 +70,24 @@ def train_model():
     print("mse:", mean_squared_error(y_test, y_pred))
     print("rmse:", mean_squared_error(y_test, y_pred, squared=False))
 
+    #df['artists'] = X[:,0]
+
     con.close()
 
 
 
 def predict(predict_values):
+
+    # try: 
+    #     artist = enc.transform([["['Madonna']"]]).ravel()[0]
+    # except ValueError: 
+    #     artist = enc.transform([["['Harry Styles']"]]).ravel()[0]
+    # print(artist)
+
+    
+
+    # predict_values = ([enc.transform([["['Uli']"]]).ravel(), 0.678, 1920])
+    # print(predict_values)
 
     probability_of_popularity = xgb_r.predict(np.array(predict_values).reshape((1,-1)))
 
