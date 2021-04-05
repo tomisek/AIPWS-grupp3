@@ -10,7 +10,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score, mean_squared_error
 
 
-enc = OrdinalEncoder(dtype = 'int64', handle_unknown = 'use_encoded_value', unknown_value = 100000)
+#enc = OrdinalEncoder(dtype = 'int64', handle_unknown = 'use_encoded_value', unknown_value = 100000)
+enc = OrdinalEncoder(handle_unknown = 'use_encoded_value', unknown_value = np.nan)
 
 xgb_r = xgb.XGBRegressor(
     max_depth=13,
