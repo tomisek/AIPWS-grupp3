@@ -142,7 +142,7 @@ export default {
     data(){
         return{
             // mean values
-            artists: 13896.0,
+            artists: '',
             acousticness: 0.501345,
             year: 1976,
             danceability: 0.536404,
