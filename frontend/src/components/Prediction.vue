@@ -95,6 +95,7 @@ export default {
             this.$store.commit('setPrediction', prediction)
 
             console.log(prediction)
+            console.log(this.year)
         }
     },
 

@@ -26,7 +26,7 @@ async def predict_click(req):
   print(artistical)
   print(artistic)
 
-  prediction = predict([artistical, values['acousticness'],values['year']])
+  prediction = predict([artistical, values['acousticness'],values['year'],values['danceability']])
 
   return res.json(prediction.tolist())
 
