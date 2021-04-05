@@ -20,13 +20,14 @@ async def predict_click(req):
 
   # artistic = "[" + "'" + values['artists'] + "'" + "]"
   values['artists'] = "[" + "'" + values['artists'] + "'" + "]"
+  # get prediction with provided values
+  prediction = predict([enc.transform([[values['artists']]]).ravel()[0],values['acousticness'],values['danceability'],values['energy'],values['explicit'],values['instrumentalness'],values['key'],values['liveness'],values['speechiness'],values['valence'],values['year'],values['tempo'],values['loudness'],values['duration_ms'],values['release_date_month'],values['release_date_day'],values['release_date_dayofweek']])
 
   # artistical = enc.transform([[artistic]]).ravel()[0]
   # print(values['artists'])
   # print(artistical)
   # print(artistic)
 
-  prediction = predict([enc.transform([[values['artists']]]).ravel()[0], values['acousticness'] , values['danceability'], values['year']])
 
   return res.json(prediction.tolist())
 
