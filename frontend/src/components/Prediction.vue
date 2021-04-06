@@ -156,8 +156,8 @@ export default {
             tempo: 116.963254,
             loudness: -11.76946,
             duration_ms: 2.326434e+05,
-            release_date_month: 4.331701,
-            release_date_day: 8.227629,
+            release_date_month: 4,
+            release_date_day: 8,
             release_date_dayofweek: 2.688245
         }
     },
