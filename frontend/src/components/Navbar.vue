@@ -1,6 +1,6 @@
 <template>
 <main>
-  <div class="jumbotron" style="background-color: #20c997;">
+  <div class="jumbotron jumbotron-fluid" style="background-color: #20c997;">
     <!-- <div class="page-header" > -->
       <router-link class="text-dark" to="/"><h1>Predict Song popularity</h1></router-link>
       
