@@ -79,17 +79,7 @@ def train_model():
 
 def predict(predict_values):
 
-    # try: 
-    #     artist = enc.transform([["['Madonna']"]]).ravel()[0]
-    # except ValueError: 
-    #     artist = enc.transform([["['Harry Styles']"]]).ravel()[0]
-    # print(artist)
-
     
-
-    # predict_values = ([enc.transform([["['Uli']"]]).ravel(), 0.678, 1920])
-    # print(predict_values)
-
     probability_of_popularity = xgb_r.predict(np.array(predict_values).reshape((1,-1)))
 
     return probability_of_popularity
