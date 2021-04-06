@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from './views/Home.vue'
 import Predict from './views/Predict.vue'
 import Statistics from './views/Statistics.vue'
+import Genre from './views/Genre.vue'
+
 
 const routes = [
     {
@@ -18,6 +20,12 @@ const routes = [
         name: 'Statistics',
         path: '/statistics',
         component: Statistics
+    },
+    {
+        name: 'Statistics by genre',
+        path: '/stats-genre',
+        component: Genre
+
     }
 
 ]
