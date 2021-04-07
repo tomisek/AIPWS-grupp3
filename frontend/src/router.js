@@ -18,13 +18,15 @@ const routes = [
     {
         name: 'Statistics',
         path: '/statistics',
-        component: Statistics
+        component: Statistics,
+        children: [
+
+            { path: '/statistics/viewstat', component: Viewstat },
+
+            // { path: 'artists', component: Artists}
+
+        ]
     },
-    {
-        name: 'Viewstat',
-        path: '/statistics/viewstat',
-        component: Viewstat
-    }
 
 ]
 

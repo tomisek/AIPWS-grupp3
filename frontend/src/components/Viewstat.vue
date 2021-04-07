@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <canvas id="viewstatChart"></canvas>
     <h2>Most popular songs by year from 1992 - 2007 (most popular years in all time)</h2>
   </div>
@@ -11,6 +11,7 @@
 // import Chart from 'chart.js'
 
 export default {
+  name : 'Viewstat',
   data() {
     return {
       canvas: '',
@@ -65,16 +66,16 @@ export default {
         },
         // Configuration options go here
         options: {
-          onClick(e){
-            // console.log(this.chart.getElementAtEvent(e))
-            let point = this.chart.getElementAtEvent(e)[0]
-            console.log(point)
-            if(point){
-              let label = this.chart.data.labels[point._index]
-              let value = this.chart.data.datasets[point._datasetIndex].data[point._index]
-              console.log(label, value)
-             }
-          }
+          // onClick(e){
+          //   // console.log(this.chart.getElementAtEvent(e))
+          //   let point = this.chart.getElementAtEvent(e)[0]
+          //   console.log(point)
+          //   if(point){
+          //     let label = this.chart.data.labels[point._index]
+          //     let value = this.chart.data.datasets[point._datasetIndex].data[point._index]
+          //     console.log(label, value)
+          //    }
+          // }
         },
       });
     }

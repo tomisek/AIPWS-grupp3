@@ -1,12 +1,22 @@
 <template>
   <main>
-      <h2>Hello from Statistics.vue</h2>
-      
+      <Buttons />
+      <router-view />
+
   </main>
 </template>
-
 <script>
+import Buttons from '../components/Buttons.vue'
+import Viewstat from '../components/Viewstat.vue'
+
 export default {
+
+  name: 'Statistics',
+
+  components: {
+    Buttons,
+    Viewstat
+  }
 
 }
 </script>
