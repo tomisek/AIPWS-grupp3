@@ -47,7 +47,7 @@ export default {
     methods:{
         async getListOfArtists(){
             let artist = this.artist
-            let res = await fetch(`api/artists/${artist}`)
+            let res = await fetch(`/api/artists/${artist}`)
 
             let listOfArtists = await res.json()
             console.log(listOfArtists)
