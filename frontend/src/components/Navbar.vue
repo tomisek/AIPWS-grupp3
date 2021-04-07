@@ -2,7 +2,7 @@
 <main>
   <div class="jumbotron jumbotron-fluid" style="background-color: #20c997;">
     <!-- <div class="page-header" > -->
-      <router-link class="text-dark" to="/"><h1>Predict Song popularity</h1></router-link>
+      <router-link class="text-dark" to="/"><h1>Spotify song popularity</h1></router-link>
       
     <!-- </div> -->
     <nav class="navbar navbar-expand-sm navbar-light bg-lightm " style="background-color: #20c997;">
