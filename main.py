@@ -11,6 +11,10 @@ app = Sanic(__name__)
 
 train_model()
 
+@app.get('/api/genres')
+async def get_all_genres(req):
+  from database import get_genres
+  return res.json(await get_genres())
 
 @app.post('/api/predict')
 async def predict_click(req):
