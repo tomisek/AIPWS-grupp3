@@ -1,7 +1,10 @@
 <template>
   <main>
     <Prediction />
-    <p>Popularity: {{ prediction }} </p>
+    <div class="container">
+      <p>Popularity (0 - 100) as measured by Spotify: {{ prediction }} </p>
+
+    </div>
 
   </main>
     
