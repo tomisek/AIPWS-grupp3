@@ -11,3 +11,8 @@ async def get(query, values = {}):
 
 async def get_genres():
   return await get('SELECT * FROM data_by_genre ORDER BY popularity DESC LIMIT 10')
+
+
+async def get_artists(artist):
+    artist = "%" + artist + "%"
+    return await get('SELECT * FROM dataset WHERE name LIKE :artist LIMIT 10', {"artist": artist})

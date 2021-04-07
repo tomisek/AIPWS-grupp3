@@ -5,8 +5,7 @@
       
       <input @keyup.prevent ="getListOfArtists" v-model="artist" class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Enter name of artist here ...">
       <datalist id="datalistOptions" >
-        <option value="Madonna">
-        <option value="Taylor Swift">
+        
       </datalist>
 
       <p>Sort songs by</p>
@@ -46,14 +45,12 @@ export default {
         }
     },
     methods:{
-        async getListOfArtists(artist){
-
-            let res = await fetch('rest/artists/name')
+        async getListOfArtists(){
+            let artist = this.artist
+            let res = await fetch(`api/artists/${artist}`)
 
             let listOfArtists = await res.json()
             console.log(listOfArtists)
-
-
         }
     }
 }

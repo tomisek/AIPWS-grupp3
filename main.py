@@ -16,6 +16,11 @@ async def get_all_genres(req):
   from database import get_genres
   return res.json(await get_genres())
 
+@app.get('/api/artists/<name:string>')
+async def getArtists(req, name):
+  from database import get_artists
+  return res.json(await get_artists(name))
+
 @app.post('/api/predict')
 async def predict_click(req):
   values = req.json
@@ -61,6 +66,8 @@ async def predict_click(req):
   con.close()
 
   return res.json(prediction.tolist())
+
+
 
 # start webserver
 if __name__ == '__main__':
