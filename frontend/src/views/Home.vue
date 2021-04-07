@@ -1,5 +1,9 @@
 <template>
-  <h1>Home View works</h1>
+  <div class="container">
+    <h2>Welcome</h2>
+    <p>Choose if you want to make a prediction or see some statistics</p>
+
+  </div>
 </template>
 
 <script>

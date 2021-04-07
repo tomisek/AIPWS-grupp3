@@ -7,7 +7,7 @@
 </template>
 <script>
 import Buttons from '../components/Buttons.vue'
-import Viewstat from '../components/Viewstat.vue'
+import Viewstat from './Viewstat.vue'
 
 export default {
 
