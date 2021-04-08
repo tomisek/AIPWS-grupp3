@@ -109,7 +109,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="release_date_dayofweek" class="col-sm-2 col-form-label text-left">Release date dayofweek <br> 0=Monday 6=Sunday </label>
+                    <label for="release_date_dayofweek" class="col-sm-2 col-form-label text-left">Release date day of week <br> 0=Monday 6=Sunday </label>
                     <div class="form-group row col-sm-2 col-form-label"> {{ release_date_dayofweek }}</div>
                     <input v-model="release_date_dayofweek"  type="range" class="form-control-range" id="release_date_dayofweek" min="0" max="6">
                 </div>

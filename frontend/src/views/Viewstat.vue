@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-md">
     <canvas id="viewstatChart"></canvas>
     <h2>Most popular songs by year from 1992 - 2007 (most popular years in all time)</h2>
   </div>
@@ -37,7 +37,7 @@ export default {
           labels: [
             "1992 Rage Against The Machine - Killing in the name",//x-axel strings
             "1993 Radiohead - Creep",
-            "1994 Mariah Carey - All I want for Christmass is you",
+            "1994 Mariah Carey - All I want for Christmas is you",
             "1995 Coolio', 'L.V.' - Gangsta's Paradise	",
             "1996 Spice Girls - Wannabe",
             "1997 The Verve - Bitter Sweet Symphony	",

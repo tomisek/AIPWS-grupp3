@@ -1,7 +1,5 @@
 from regression_model import train_model, predict
 from sanic import Sanic, response as res
-#from sklearn.preprocessing import OrdinalEncoder
-from regression_model import OrdinalEncoder
 from regression_model import enc
 import sqlite3
 import numpy as np
