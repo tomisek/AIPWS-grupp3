@@ -13,6 +13,19 @@ async def get_genres():
   return await get('SELECT * FROM data_by_genre ORDER BY popularity DESC LIMIT 10')
 
 
+# async def get_artists(artist):
+#   artist = artist.replace(' ', '')
+#   query = "SELECT * FROM dataset WHERE REPLACE(name,' ','') LIKE :artist LIMIT 10"
+#   return await get(query, {"artist": "%" + artist + "%"})
+
 async def get_artists(artist):
-    artist = "%" + artist + "%"
-    return await get('SELECT * FROM dataset WHERE name LIKE :artist LIMIT 10', {"artist": artist})
+  artist = str(artist)
+  # artist = 'likexaxprayer'
+  # artist = artist.replace(' ', 'x')
+  query = "SELECT * FROM dataset WHERE REPLACE(name,' ','x') LIKE  '%' || :artist || '%' LIMIT 10"
+  return await get(query, {"artist": artist})
+
+
+# async def get_artists(artist):
+#   query = "SELECT * FROM dataset WHERE name LIKE  '%' || 'Like a Prayer' || '%' LIMIT 10"
+#   return await get(query)
