@@ -26,7 +26,9 @@ const routes = [
 
             { path: '/statistics/viewstat', component: Viewstat },
 
-            { path: '/statistics/artists', component: Artists}
+            { path: '/statistics/artists', component: Artists},
+
+            { path: '/statistics/genre', component: Genre}
 
         ]
     },

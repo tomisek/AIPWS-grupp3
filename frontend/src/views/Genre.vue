@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <canvas id="genreChart"></canvas>
+  <div class ="container">
     <h2>Hello from Genre.vue</h2>
+    <canvas id="genreChart"></canvas>
   </div>
 
 </template>
@@ -47,19 +47,6 @@ export default {
               order: 0
             },
           ],
-        },
-        // Configuration options go here
-        options: {
-          onClick(e){
-            // console.log(this.chart.getElementAtEvent(e))
-            let point = this.chart.getElementAtEvent(e)[0]
-            // console.log(point)
-            if(point){
-              let label = this.chart.data.labels[point._index]
-              let value = this.chart.data.datasets[point._datasetIndex].data[point._index]
-              console.log(label, value)
-            }
-          }
         },
       });
     }
