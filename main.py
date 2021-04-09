@@ -1,7 +1,5 @@
 from regression_model import train_model, predict
 from sanic import Sanic, response as res
-#from sklearn.preprocessing import OrdinalEncoder
-from regression_model import OrdinalEncoder
 from regression_model import enc
 import sqlite3
 import numpy as np
@@ -11,6 +9,15 @@ app = Sanic(__name__)
 
 train_model()
 
+@app.get('/api/genres')
+async def get_all_genres(req):
+  from database import get_genres
+  return res.json(await get_genres())
+
+@app.get('/api/artists/<name:string>')
+async def getArtists(req, name):
+  from database import get_artists
+  return res.json(await get_artists(name))
 
 @app.post('/api/predict')
 async def predict_click(req):
@@ -57,6 +64,8 @@ async def predict_click(req):
   con.close()
 
   return res.json(prediction.tolist())
+
+
 
 # start webserver
 if __name__ == '__main__':

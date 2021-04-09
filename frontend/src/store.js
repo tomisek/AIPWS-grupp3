@@ -2,7 +2,7 @@ import { createStore } from 'vuex'
 
 // this.$store.state.prediction
 const state = {
-    prediction: []
+    prediction: ''
             
      
 }

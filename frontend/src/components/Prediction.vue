@@ -1,16 +1,6 @@
 <template>
     <main>
 
-        <!-- <form @submit.prevent ="predict">
-            <h3>Predicting spotify popularity</h3>
-            <input v-model="artists" type="range" name="artist" placeholder="artist" min="1" max="30000" >
-            <label for="artist">Artist</label><br>
-            <input v-model="acousticness" type="range" name="acousticness" placeholder="acousticness" min="0" max="1"  step="0.001">
-            <label for="acousticness">Acousticness</label><br>
-            <input v-model="year" type="range" name="year" placeholder="year" min="1920" max="2021" >
-            <label for="year">Year</label><br>
-            <button>test</button>
-        </form> -->
         <div class="container-md ">
             <form @submit.prevent ="predict">
                 <div class ="form-group row">
@@ -28,7 +18,7 @@
                     <input v-model="year"  type="range" class="form-control-range" id="year" min="1920" max="2021" >
                 </div>
 
-                <fieldset class="form-group row">
+                <!-- <fieldset class="form-group row">
                     <legend class="col-form-label col-sm-2 text-left">Explicit</legend>
                     <div class="col-sm-10">
                     <div class="form-check">
@@ -44,7 +34,7 @@
                         </label>
                     </div>
                     </div>
-                </fieldset>
+                </fieldset> -->
 
                 <div class="form-group row">
                     <label for="danceability" class="col-sm-2 col-form-label text-left">Danceability </label>
@@ -57,7 +47,7 @@
                     <div class="form-group row col-sm-2 col-form-label"> {{ energy }}</div>
                     <input v-model="energy"  type="range" class="form-control-range" id="energy" min="0" max="1" step="0.001" >
                 </div>
-                
+
                 <div class="form-group row">
                     <label for="instrumentalness" class="col-sm-2 col-form-label text-left">Instrumentalness </label>
                     <div class="form-group row col-sm-2 col-form-label"> {{ instrumentalness }}</div>
@@ -119,17 +109,15 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="release_date_dayofweek" class="col-sm-2 col-form-label text-left">Release date dayofweek <br> 0=Monday 6=Sunday </label>
+                    <label for="release_date_dayofweek" class="col-sm-2 col-form-label text-left">Release date day of week <br> 0=Monday 6=Sunday </label>
                     <div class="form-group row col-sm-2 col-form-label"> {{ release_date_dayofweek }}</div>
                     <input v-model="release_date_dayofweek"  type="range" class="form-control-range" id="release_date_dayofweek" min="0" max="6">
                 </div>
 
-                
+                <div class="form-group row col-sm-2">
 
-                <div class="form-group row">
-                    <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary">test</button>
-                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                
                 </div>
             </form>
 
@@ -163,8 +151,8 @@ export default {
     },
     methods:{
         async predict(){
-            
-            
+
+
             let values = {
                 artists: this.artists,
                 acousticness : this.acousticness,
@@ -201,7 +189,7 @@ export default {
     },
 
     created(){
-    
+
     }
 }
 </script>

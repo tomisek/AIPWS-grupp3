@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from './views/Home.vue'
 import Predict from './views/Predict.vue'
 import Statistics from './views/Statistics.vue'
+import Artists from './views/Artists.vue'
+import Viewstat from './views/Viewstat.vue'
 import Genre from './views/Genre.vue'
 
 
@@ -19,14 +21,15 @@ const routes = [
     {
         name: 'Statistics',
         path: '/statistics',
-        component: Statistics
-    },
-    {
-        name: 'Statistics by genre',
-        path: '/stats-genre',
-        component: Genre
+        component: Statistics,
+        children: [
 
-    }
+            { path: '/statistics/viewstat', component: Viewstat },
+
+            { path: '/statistics/artists', component: Artists}
+
+        ]
+    },
 
 ]
 
