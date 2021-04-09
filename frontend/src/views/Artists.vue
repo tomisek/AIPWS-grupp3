@@ -48,6 +48,7 @@ export default {
         async getListOfArtists(){
             let artist = this.artist
             console.log(artist)
+            artist = this.artist.replaceAll(' ', '')
             let res = await fetch(`/api/artists/${artist}`)
 
             let listOfArtists = await res.json()

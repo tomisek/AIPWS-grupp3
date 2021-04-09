@@ -22,7 +22,7 @@ async def get_artists(artist):
   artist = str(artist)
   # artist = 'likexaxprayer'
   # artist = artist.replace(' ', 'x')
-  query = "SELECT * FROM dataset WHERE REPLACE(name,' ','x') LIKE  '%' || :artist || '%' LIMIT 10"
+  query = "SELECT * FROM dataset WHERE REPLACE(name,' ','') LIKE  '%' || :artist || '%' LIMIT 10"
   return await get(query, {"artist": artist})
 
 
