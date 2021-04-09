@@ -19,10 +19,8 @@ async def get_genres():
 #   return await get(query, {"artist": "%" + artist + "%"})
 
 async def get_artists(artist):
-  artist = str(artist)
-  # artist = 'likexaxprayer'
-  # artist = artist.replace(' ', 'x')
-  query = "SELECT * FROM dataset WHERE REPLACE(name,' ','x') LIKE  '%' || :artist || '%' LIMIT 10"
+  artist = artist.replace('%20', ' ')  
+  query = "SELECT DISTINCT * FROM data_by_artist WHERE artists LIKE  '%' || :artist || '%' LIMIT 5"
   return await get(query, {"artist": artist})
 
 
