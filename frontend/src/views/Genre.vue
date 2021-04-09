@@ -13,18 +13,26 @@ export default {
   data() {
     return {
       canvas: '',
-
       
     }
   },
 
   mounted(){
+    this.getListOfGenres()
     let canvas = document.getElementById('genreChart')
     let ctx = canvas.getContext('2d')
     this.canvas = ctx
     this.createChart()
   },
   methods: {
+    async getListOfGenres(){
+            let res = await fetch(`/api/genres`)
+            let listOfGenres = await res.json()
+            console.log(listOfGenres[0]['genres'])
+            
+
+
+        },
     createChart(){
       this.chart = new Chart(this.canvas, {
         // The type of chart we want to create

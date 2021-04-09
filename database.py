@@ -10,7 +10,7 @@ async def get(query, values = {}):
   return dicts
 
 async def get_genres():
-  return await get('SELECT * FROM data_by_genre ORDER BY popularity DESC LIMIT 10')
+  return await get('SELECT genres, popularity FROM data_by_genre ORDER BY popularity DESC LIMIT 10')
 
 
 async def get_artists(artist):
