@@ -10,7 +10,7 @@
 
       <!-- <input @keyup.prevent ="getListOfArtists" v-model="artist" class ="artList" type="text" list="myList">
       <datalist id="myList">
-        <!-- <option value="Taylor Swift"></option> -->
+        <option value="Taylor Swift"></option>
       <!-- </datalist> -->
 
       <p>Sort songs by</p>
@@ -53,7 +53,7 @@ export default {
         async getListOfArtists(){
 
             let artist = this.artist
-           
+            
             let res = await fetch(`/api/artists/${artist}`)
 
             let listOfArtists = await res.json()
