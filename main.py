@@ -19,6 +19,11 @@ async def getArtists(req, name):
   from database import get_artists
   return res.json(await get_artists(name))
 
+@app.get('/api/songs/<name:string>')
+async def getSongs(req, name):
+  from database import get_songs
+  return res.json(await get_songs(name))
+
 @app.post('/api/predict')
 async def predict_click(req):
   values = req.json

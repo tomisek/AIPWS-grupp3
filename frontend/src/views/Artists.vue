@@ -5,13 +5,8 @@
       
       <input @keyup.prevent ="getListOfArtists" v-model="artist" class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Enter name of artist here ..." autocomplete="off">
       <datalist id="datalistOptions">
-        <option value="Taylor Swift"></option>
+        <!-- <option value="Taylor Swift"></option> -->
       </datalist>
-
-      <!-- <input @keyup.prevent ="getListOfArtists" v-model="artist" class ="artList" type="text" list="myList">
-      <datalist id="myList">
-        <option value="Taylor Swift"></option>
-      <!-- </datalist> -->
 
       <p>Sort songs by</p>
       <div class="input-group mb-3">
@@ -50,9 +45,11 @@ export default {
         }
     },
     methods:{
+
         async getListOfArtists(){
 
             let artist = this.artist
+
             
             let res = await fetch(`/api/artists/${artist}`)
 
@@ -62,14 +59,19 @@ export default {
               artistList.push(art.artists)
             }
 
-            console.log(listOfArtists)
             $("#datalistOptions").empty()
+            if (artist == '') {
+              return;
+            }
             for (let ar of artistList) {
-              console.log(ar)
-              $("#datalistOptions").append(`<option value=${ar}></option>`)
+              ar = ar.replaceAll('"', '&quot;')
+              if (ar.toLowerCase() != artist.toLowerCase()) {
+                $("#datalistOptions").append(`<option value=${'"' + ar + '"'}></option>`)
+              }
             }
 
         }
+        
     }
 }
 </script>
