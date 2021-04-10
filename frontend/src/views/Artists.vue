@@ -59,15 +59,20 @@ export default {
               artistList.push(art.artists)
             }
 
-            $("#datalistOptions").empty()
+            // $("#datalistOptions option:selected")
+            // if ($("#datalistOptions option:selected") !== null) {
+            //   alert('Great success, yes!')
+            // }
+
             if (artist == '') {
+              // $("#datalistOptions").empty()
               return;
             }
+
+            $("#datalistOptions").empty()
             for (let ar of artistList) {
               ar = ar.replaceAll('"', '&quot;')
-              if (ar.toLowerCase() != artist.toLowerCase()) {
-                $("#datalistOptions").append(`<option value=${'"' + ar + '"'}></option>`)
-              }
+              $("#datalistOptions").append(`<option value=${'"' + ar + '"'}></option>`)
             }
 
         }
