@@ -18,17 +18,11 @@
     </div>
 
     <div class="col">
-      <ol>
-        <li>Song1</li>
-        <li>Song2</li>
-        <li>Song3</li>
-        <li>Song4</li>
-        <li>Song5</li>
-        <li>Song6</li>
-        <li>Song7</li>
-        <li>Song8</li>
-        <li>Song9</li>
-        <li>Song10</li>
+      <span> Artist: {{ artist }}</span>
+      <ol id="listOfSongs">
+        <li v-for="(s, index) of songs" :key="index" :song="s" >
+          Name: {{songs.name}} popularity: {{songs.popularity}}
+        </li>
       </ol>
     </div>
 
@@ -38,11 +32,16 @@
 
 <script>
 export default {
+
     data(){
         return{
-            artist: ''
+            artist: '',
+            songs: [],
         }
     },
+      mounted(){
+        this.getListOfSongs()
+      },
     methods:{
 
         async getListOfArtists(event){
@@ -74,6 +73,21 @@ export default {
             }
 
             
+        },
+
+        async getListOfSongs (){
+
+         let songs = await fetch(`/api/songs/${this.artist}`)
+
+          songs = await songs.json()
+          for (let song of songs){
+            this.songs.push(song)
+            console.log(song);
+          }
+          
+          //console.log(this.songs);
+        
+
         }
     }
 }

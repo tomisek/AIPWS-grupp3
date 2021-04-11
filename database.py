@@ -20,10 +20,10 @@ async def get_genres():
 
 async def get_artists(artist):
   artist = artist.replace('%20', ' ')  
-  query = "SELECT DISTINCT * FROM data_by_artist2 WHERE artists LIKE  '%' || :artist || '%' LIMIT 5"
+  query = "SELECT DISTINCT * FROM data_by_artist WHERE artists LIKE  '%' || :artist || '%' LIMIT 5"
   return await get(query, {"artist": artist})
 
 async def get_songs(artist):
   artist = artist.replace('%20', ' ')  
-  query = "SELECT name FROM cleaned_up_dataset WHERE artists LIKE  '%' || :artist || '%'"
+  query = "SELECT name, popularity FROM dataset WHERE artists LIKE  '%' || :artist || '%' ORDER BY popularity DESC LIMIT 10"
   return await get(query, {"artist": artist})
