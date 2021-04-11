@@ -37,6 +37,7 @@
 </template>
 
 <script>
+
 export default {
     data(){
         return{
@@ -45,9 +46,14 @@ export default {
     },
     methods:{
 
+        delete_virtual_doms() {
+          // Iterate over the dom elts and do the
+          $("#datalistOptions").empty()
+          
+        },
+
         async getListOfArtists(event){
-            
-                    
+            this.delete_virtual_doms()
             let artist = this.artist
 
             
@@ -63,11 +69,9 @@ export default {
 
 
             if (artist == '' || event.which == null) {
-              $("#datalistOptions").empty()
               return;
             }
           
-            $("#datalistOptions").empty()
             for (let ar of artistList) {
               ar = ar.replaceAll('"', '&quot;')
               $("#datalistOptions").append(`<option value=${'"' + ar + '"'}></option>`)
@@ -89,5 +93,6 @@ export default {
   .form-control {
     width: 50%;
   }
-  
+
+
 </style>
