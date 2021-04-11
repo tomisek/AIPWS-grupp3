@@ -5,7 +5,6 @@
       
       <input @keyup.prevent ="getListOfArtists" v-model="artist" class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Enter name of artist here ..." autocomplete="off">
       <datalist id="datalistOptions">
-        <!-- <option value="Taylor Swift"></option> -->
       </datalist>
 
       <p>Sort songs by</p>
@@ -46,8 +45,9 @@ export default {
     },
     methods:{
 
-        async getListOfArtists(){
-
+        async getListOfArtists(event){
+            
+                    
             let artist = this.artist
 
             
@@ -59,24 +59,22 @@ export default {
               artistList.push(art.artists)
             }
 
-            // $("#datalistOptions option:selected")
-            // if ($("#datalistOptions option:selected") !== null) {
-            //   alert('Great success, yes!')
-            // }
+            
 
-            if (artist == '') {
-              // $("#datalistOptions").empty()
+
+            if (artist == '' || event.which == null) {
+              $("#datalistOptions").empty()
               return;
             }
-
+          
             $("#datalistOptions").empty()
             for (let ar of artistList) {
               ar = ar.replaceAll('"', '&quot;')
               $("#datalistOptions").append(`<option value=${'"' + ar + '"'}></option>`)
             }
 
+            
         }
-        
     }
 }
 </script>
