@@ -25,5 +25,5 @@ async def get_artists(artist):
 
 async def get_songs(artist):
   artist = artist.replace('%20', ' ')  
-  query = "SELECT name FROM cleaned_up_dataset WHERE artists LIKE  '%' || :artist || '%'"
+  query = "SELECT name FROM cleaned_up_dataset WHERE artists = :artist"
   return await get(query, {"artist": artist})
