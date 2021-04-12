@@ -47,38 +47,37 @@ export default {
     methods:{
 
         async getListOfArtists(event){
+          console.log(event.which)
           // Commentary:
           // At first this function was triggered by a keyup event. This lead to an extremely annoying flickering due to the
           // virtual DOM that was reusing previous searches to optmize speed. When the key was pressed down one could only
           // see the saved searches, if even for a short while. It looked like a bug in the app. I tried to find a way to override
           // this particular optimization, but I did not manage to get anywhere. Since the keydown event was causing all problems
           // I then choose it as the trigger for the function. Problem was that then I didn't have instant access to the latest 
-          // added character in the input. So I had to do some uggly hacking. In the end you cannot use the mouse pointer to position 
-          // yourself in the middle of the word if you want correct dropdown results. I choose to save this version simply because I 
-          // put a lot of time on this and it is really a question of what you rather not have. I hate flickering.
+          // added character in the input. So I had to do some uggly hacking. In the end it is kind of working. The only bug is:
+          // when you move the cursor with any of the arrow-keys, then you have to click on the drop-down-arrow to see the options.
           // I REALLY hope there is a smoother and a correct way to do this. /Konstantin
-            
+
             $("#datalistOptions").empty()
             let artist = this.artist
 
-            // Unless we're using the delete key, we're assuming that the inserted
-            // key should be at the end of the word.
-            // No need to access the latest key value if it is any of these three:
-            if (event.key !== 'Control' && event.key !== 'Alt' && event.which !== 32) {
-              artist = artist + event.key
-            }
-            // Can only use delete when positioned at the start.
-            else if (event.key == 'Delete') {
-              artist = event.key + artist  
+            // No need to access the latest key value if it is any of these:
+            if (event.key !== 'Control' && event.key !== 'Alt'  && event.key !== 'ArrowLeft' && event.key !== 'ArrowRight' && event.key !== 'Enter' && event.key !== 'Shift') {
+              let id = $(".form-control")[0].selectionStart
+              artist = artist.slice(0, id) + event.key + artist.slice(id, artist.length)
             }
 
             // The space bar key (code 32) seems to be trimmed of when send with fetch function below,
             // so we do the following hack:
-            artist = (event.which == 32 ? artist + "%20": artist) 
+            artist = artist.replaceAll(" ", "%20")
 
             // Code to make backspace and delete possible. 
             // Can only use backspace when positioned at the end.
             // Can only use delete when positioned at the start.
+            const regex5 = /%20Backspace/ig;
+            artist = artist.replaceAll(regex5,"")
+            const regex6 = /Delete%20/ig;
+            artist = artist.replaceAll(regex6,"")
             const regex1 = /\s\SBackspace/ig;
             artist = artist.replaceAll(regex1,"%20")
             const regex2 = /.?Backspace/ig;
@@ -88,7 +87,13 @@ export default {
             const regex4 = /Delete\S\s/ig;
             artist = artist.replaceAll(regex4,"%20")
 
-
+            // Ensure there will be no adding to a dropdown when the input is empty or when
+            // an artist has been selected. When you click on an option, then apperantly it
+            // counts as a key-event and the value is null.
+            if (artist == '' || event.which == null) {
+              return
+            }
+            console.log(artist)
             let res = await fetch(`/api/artists/${artist}`)
 
 
@@ -98,19 +103,15 @@ export default {
               artistList.push(art.artists)
             }
 
-            
-
-            // Ensure there will be no adding to a dropdown when the input is empty or when
-            // an artist has been selected. When you click on an option, then apperantly it
-            // counts as a key-event and the value is null.
-            if (artist == '' || event.which == null) {
-              return
-            }
-          
             for (let ar of artistList) {
               ar = ar.replaceAll('"', '&quot;')
               $("#datalistOptions").append(`<option value=${'"' + ar + '"'}></option>`)
             }
+
+            
+            
+            
+
 
             
         }
