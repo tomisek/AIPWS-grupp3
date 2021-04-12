@@ -1,31 +1,34 @@
 <template>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8 ">
+        
+        <input @keyup.prevent ="getListOfArtists" v-model="artist" class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Enter name of artist here ..." autocomplete="off">
+        <datalist id="datalistOptions">
+        </datalist>
 
-  <div class="row">
-    <div class="col">
+        <p>Sort songs by</p>
+        <div class="input-group mb-3">
+          <select class="form-select" id="inputGroupSelect02">
+            <option selected>Popularity</option>
+            <option value="1">One</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="col-md-4 text-left" >
+        <h3> Artist: {{ artist }}</h3>
+        <ol id="listOfSongs">
+          <li v-for="(s, index) of songs" :key="index" :song="s"  >
+            {{s.name}} 
+          </li>
+        </ol>
+        
       
-      <input @keyup.prevent ="getListOfArtists" v-model="artist" class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Enter name of artist here ..." autocomplete="off">
-      <datalist id="datalistOptions">
-      </datalist>
-
-      <p>Sort songs by</p>
-      <div class="input-group mb-3">
-        <select class="form-select" id="inputGroupSelect02">
-          <option selected>Popularity</option>
-          <option value="1">One</option>
-        </select>
       </div>
 
     </div>
-
-    <div class="col">
-      <span> Artist: {{ artist }}</span>
-      <ol id="listOfSongs">
-        <li v-for="(s, index) of songs" :key="index" :song="s" >
-          Name: {{songs.name}} popularity: {{songs.popularity}}
-        </li>
-      </ol>
-    </div>
-
   </div>
 
 </template>
