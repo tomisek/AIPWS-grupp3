@@ -17,7 +17,7 @@
 
       </div>
 
-      <div class="col-md-4 text-left" >
+      <div class="col-md-4 text-left">
         <h3> Artist: {{ artist }}</h3>
         <ol id="listOfSongs">
           <li v-for="(s, index) of songs" :key="index" :song="s"  >
@@ -43,7 +43,7 @@ export default {
         }
     },
       mounted(){
-        this.getListOfSongs()
+        // this.getListOfSongs()
       },
     methods:{
 
@@ -75,22 +75,26 @@ export default {
               $("#datalistOptions").append(`<option value=${'"' + ar + '"'}></option>`)
             }
 
-            
+            if ($("#form-control").val() == null){
+              console.log("form-control")
+              this.getListOfSongs()
+            }
+            // this.getListOfSongs()
+
+
         },
 
         async getListOfSongs (){
 
+         
          let songs = await fetch(`/api/songs/${this.artist}`)
+
 
           songs = await songs.json()
           for (let song of songs){
             this.songs.push(song)
             console.log(song);
           }
-          
-          //console.log(this.songs);
-        
-
         }
     }
 }
