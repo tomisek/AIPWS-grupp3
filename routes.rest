@@ -3,5 +3,6 @@ POST http://127.0.0.1:8000/api/predict
 {
    "artists" : 6316.0,
    "acousticness": 0.678,
-   "year": 2020 
+   "year": 2020, 
+   "danceability": 0.5
 }
