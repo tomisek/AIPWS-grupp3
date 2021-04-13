@@ -3,23 +3,33 @@
     <div class="row">
       <div class="col-md-8 ">
         
-        <input @keyup.prevent ="getListOfArtists" v-model="artist" class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Enter name of artist here ..." autocomplete="off">
+        <input @change="getListOfSongs" @keydown ="getListOfArtists" v-model="artist" class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Enter name of artist here ..." autocomplete="off">
         <datalist id="datalistOptions">
         </datalist>
 
         <p>Sort songs by</p>
         <div class="input-group mb-3">
           <select class="form-select" id="inputGroupSelect02">
-            <option selected>Popularity</option>
-            <!-- <option value="1">One</option> -->
+            <option value="popularity" selected>Popularity</option>
+            <option value="energy">Energy</option>
+            <option value="instrumentalness">Instrumentalness</option>
+            <option value="tempo">Tempo</option>
+            <option value="release date">Release date</option>
+            <option value="duration_ms">Duration</option>
+            <option value="danceability">Danceability</option>
+            <option value="acousticness">Acousticness</option>
+            <option value="liveness">Liveness</option>
+            <option value="loudness">Loudness</option>
+            <option value="speachiness">Speachiness</option>
+            <option value="valence">Valence</option>
           </select>
         </div>
 
       </div>
 
-      <div class="col-md-4 text-left">
-        <h3 class="artist-name hidden"> Artist: {{ artist }}</h3>
-        <ol id="listOfSongs hidden">
+      <div class="col-md-4 text-left artist-and-songs">
+        <h3 class="artist-name"> Artist: {{ artist }}</h3>
+        <ol id="listOfSongs">
           <li v-for="(s, index) of songs" :key="index" :song="s"  >
             {{s.name}} 
           </li>
@@ -44,66 +54,49 @@ export default {
         }
     },
     mounted(){
-        // $(".artist-name").attr("class", "hidden")
+        
 
     },
     methods:{
 
         async getListOfArtists(event){
+          
           // Commentary:
           // At first this function was triggered by a keyup event. This lead to an extremely annoying flickering due to the
           // virtual DOM that was reusing previous searches to optmize speed. When the key was pressed down one could only
           // see the saved searches, if even for a short while. It looked like a bug in the app. I tried to find a way to override
           // this particular optimization, but I did not manage to get anywhere. Since the keydown event was causing all problems
           // I then choose it as the trigger for the function. Problem was that then I didn't have instant access to the latest 
-          // added character in the input. So I had to do some uggly hacking. In the end it is kind of working. The only bug is:
-          // when you move the cursor with any of the arrow-keys, then you have to click on the drop-down-arrow to see the options.
+          // added character in the input. So I had to do some uggly hacking.
           // I REALLY hope there is a smoother and a correct way to do this. /Konstantin
 
           
           $("#datalistOptions").empty()
-          // $("#listOfSongs").attr("class", "hidden")
-          // $(".artist-name").attr("class", "hidden")
 
+          // hide the artist and songs whenever you're editing the input
+          $(".artist-and-songs").css("visibility", "hidden")
 
+          
           let artist = this.artist
-          
-          // Clear the listings of songs
-          
-
-          if (event.which == null){
-            // console.log("form-control")
-            $("#listOfSongs").toggleClass("hidden")
-            $(".artist-name").toggleClass("hidden")
-            await this.getListOfSongs()
-            return
-          }
 
           // No need to access the latest key value if it is any of these:
-          if (event.key !== 'Control' && event.key !== 'Alt'  && event.key !== 'ArrowLeft' && event.key !== 'ArrowRight' && event.key !== 'Enter' && event.key !== 'Shift') {
+          if (event.which !== null && event.key !== 'Control' && event.key !== 'Alt'  && event.key !== 'ArrowLeft' && event.key !== 'ArrowRight' && event.key !== 'Enter' && event.key !== 'Shift') {
             let id = $(".form-control")[0].selectionStart
             artist = artist.slice(0, id) + event.key + artist.slice(id, artist.length)
           }
-
-          // The space bar key (code 32) seems to be trimmed of when send with fetch function below,
-          // so we do the following hack:
-          artist = artist.replaceAll(" ", "%20")
-
+          
           // Code to make backspace and delete possible. 
-          // Can only use backspace when positioned at the end.
-          // Can only use delete when positioned at the start.
           const regex5 = /%20Backspace/ig;
           artist = artist.replaceAll(regex5,"")
           const regex6 = /Delete%20/ig;
           artist = artist.replaceAll(regex6,"")
           const regex1 = /\s\SBackspace/ig;
-          artist = artist.replaceAll(regex1,"%20")
+          artist = artist.replaceAll(regex1,"")
           const regex2 = /.?Backspace/ig;
           artist = artist.replaceAll(regex2,"")
           const regex3 = /Delete.?/ig;
           artist = artist.replaceAll(regex3,"")
-          const regex4 = /Delete\S\s/ig;
-          artist = artist.replaceAll(regex4,"%20")
+
 
           // Ensure there will be no adding to a dropdown when the input is empty or when
           // an artist has been selected. When you click on an option, then apperantly it
@@ -111,7 +104,24 @@ export default {
           if (artist == '') {
             return
           }
+
+          // Whenever a select is done, then 'event.which = null'. It can't replace the change
+          // event for various reasons, but it will work fine for this little css-edit. Could not put
+          // the following under a 'change-event' generated function, because if you search 
+          // for the same thing twice, then the change-event will not fire up and therefore stay 
+          // invisible.
+          if (event.which == null){
+            $(".artist-and-songs").css("visibility", "visible")
+          }
+
+          artist = artist.replaceAll("%20"," ")
+          // When the string is sent by url, and it has a leading empty space, it will be cut off.
+          // Therefore, we add it here
+          if(artist[artist.length - 1] == " ") {
+            artist = artist.substring(0, artist.length -1) + "%20"
+          }
           console.log(artist)
+          console.log(encodeURI(artist))
           let res = await fetch(`/api/artists/${artist}`)
 
 
@@ -126,17 +136,20 @@ export default {
             $("#datalistOptions").append(`<option value=${'"' + ar + '"'}></option>`)
           }
 
+
       },
 
       async getListOfSongs (){
+
+        $("#listOfSongs").children().remove()
         
         let songs = await fetch(`/api/songs/${this.artist}`)
-
         songs = await songs.json()
+        console.log(songs)
         for (let song of songs){
           this.songs.push(song)
-          console.log(song);
           }
+
       }
 
     }
@@ -154,8 +167,8 @@ export default {
     width: 50%;
   }
 
-  .hidden {
-    visibility:hidden;
+  .artist-and-songs {
+    visibility: hidden;
   }
 
 
