@@ -7,24 +7,6 @@
         <datalist id="datalistOptions">
         </datalist>
 
-        <p>Sort songs by</p>
-        <div class="input-group mb-3">
-          <select class="form-select" id="inputGroupSelect02">
-            <option value="popularity" selected>Popularity</option>
-            <option value="energy">Energy</option>
-            <option value="instrumentalness">Instrumentalness</option>
-            <option value="tempo">Tempo</option>
-            <option value="release date">Release date</option>
-            <option value="duration_ms">Duration</option>
-            <option value="danceability">Danceability</option>
-            <option value="acousticness">Acousticness</option>
-            <option value="liveness">Liveness</option>
-            <option value="loudness">Loudness</option>
-            <option value="speachiness">Speachiness</option>
-            <option value="valence">Valence</option>
-          </select>
-        </div>
-
       </div>
 
       <div class="col-md-4 text-left artist-and-songs">
