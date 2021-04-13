@@ -9,11 +9,6 @@ app = Sanic(__name__)
 
 train_model()
 
-@app.get('/api/genres')
-async def get_all_genres(req):
-  from database import get_genres
-  return res.json(await get_genres())
-
 @app.get('/api/artists/<name:string>')
 async def getArtists(req, name):
   from database import get_artists
@@ -24,19 +19,21 @@ async def get_all_songs(req):
   from database import getSongs
   return res.json(await getSongs())
 
+@app.get('/api/songs/<name:string>')
+async def getSongs(req, name):
+  from database import get_songs
+  return res.json(await get_songs(name))
+
 @app.post('/api/predict')
 async def predict_click(req):
   values = req.json
 
-  # artistic = "[" + "'" + values['artists'] + "'" + "]"
-  values['artists'] = "[" + "'" + values['artists'] + "'" + "]"
-  # get prediction with provided values
+ 
+  #values['artists'] = "[" + "'" + values['artists'] + "'" + "]"
+  
   prediction = predict([enc.transform([[values['artists']]]).ravel()[0],values['acousticness'],values['danceability'],values['energy'],values['explicit'],values['instrumentalness'],values['key'],values['liveness'],values['speechiness'],values['valence'],values['year'],values['tempo'],values['loudness'],values['duration_ms'],values['release_date_month'],values['release_date_day'],values['release_date_dayofweek']])
   print(prediction)
-  # artistical = enc.transform([[artistic]]).ravel()[0]
-  # print(values['artists'])
-  # print(artistical)
-  # print(artistic)
+  
 
   acou = values['acousticness']
   art = values['artists']
