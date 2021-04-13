@@ -16,3 +16,6 @@ async def get_genres():
 async def get_artists(artist):
     artist = "%" + artist + "%"
     return await get('SELECT * FROM dataset WHERE name LIKE :artist LIMIT 10', {"artist": artist})
+
+async def getSongs():
+    return await get('SELECT year, artists, name, MAX(popularity) as max_popularity FROM dataset WHERE year BETWEEN 1992 AND 2007 GROUP BY year')
